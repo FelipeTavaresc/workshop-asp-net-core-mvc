@@ -33,10 +33,13 @@ namespace SalesWebMVC.Services
             return await _context.Seller.Include(obj => obj.Department).FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public async Task<List<Seller>> FindByName(string name)
+        public async Task<List<Seller>> FindByNameAsync(string name)
         {
             var result = from obj in _context.Seller select obj;
-            return await result.Include(obj => obj.Name == name).ToListAsync();
+
+            result = result.Where(x => x.Name.Contains(name));
+
+            return await result.ToListAsync();
         }
 
         public async Task RemoveAsync(int id)

@@ -28,9 +28,9 @@ namespace SalesWebMVC.Controllers
             return View(list);
         }
 
-        public async Task<IActionResult> Search(string name)
+        public async Task<IActionResult> Search(string search)
         {
-            var result = await _sellerService.FindByName(name);
+            var result = await _sellerService.FindByNameAsync(search);
             return View(result);
         }
 
